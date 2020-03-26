@@ -1,0 +1,10 @@
+.header-container {
+    height: 10vh;
+    width: 100vw;
+    background-color: blue;
+    padding: 3px;
+}
+
+h2 {
+    margin-left: 10px;
+}
