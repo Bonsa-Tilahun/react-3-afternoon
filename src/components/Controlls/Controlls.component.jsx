@@ -14,7 +14,7 @@ const Controlls = (props)=>{
                 {/* <CustomButton name={`Edit`}/>
                 <CustomButton onClick={() => { props.delete(props.index)}} name={`Delete`}/>
                 <CustomButton name={`New`}/> */}
-                <button className='customBtn' onClick={() => { props.delete(props.index)}}>Edit</button>
+                <button className='customBtn' onClick={() => { props.edit(props.index)}}>Edit</button>
                 <button className='customBtn' onClick={() => { props.delete(props.index)}}>Delete</button>
                 <button className='customBtn' onClick={() => { props.delete(props.index)}}>New</button>
             </div>
