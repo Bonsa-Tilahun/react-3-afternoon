@@ -13,20 +13,22 @@ class App extends Component{
     this.state={
       dataSet: data,
       current: [],
-      index: 1
+      index: 0,
+      editMode: false
     }
     this.handleNext = this.handleNext.bind(this)
     this.handlePrev = this.handlePrev.bind(this)
+    this.handleDelete = this.handleDelete.bind(this)
   }
 
   componentDidMount(){
     this.setState({
-      current: this.state.dataSet.filter(data => data.id === 1)
+      current: this.state.dataSet.filter((data, i) => i === 0)
     })
   }
 
   handleNext(){
-    let nextData = this.state.dataSet.filter(data => data.id === this.state.index+1)
+    let nextData = this.state.dataSet.filter((data,i) => i === this.state.index+1)
     this.setState({
       current: nextData,
       index: this.state.index + 1
@@ -34,20 +36,46 @@ class App extends Component{
   }
 
   handlePrev(){
-    let prevData = this.state.dataSet.filter(data => data.id === this.state.index-1)
+    let prevData = this.state.dataSet.filter((data,i) => i === this.state.index-1)
     this.setState({
       current: prevData,
       index: this.state.index - 1
     })
   }
 
+  handleDelete(i){
+    this.state.dataSet.splice(i,1)
+    let newIndex = this.state.index
+    let newCurrentData = () => {
+      if(i === this.state.dataSet.length){
+        newIndex--
+        return [this.state.dataSet[i-1]]
+      } else{
+        return [this.state.dataSet[i]]
+      }
+    }
+    this.setState({
+      current: newCurrentData(),
+      index: newIndex
+    })
+  }
+
   render(){
-    let currentDisplayCard = this.state.current.map(data => <Card key={data.id} cardData={data}/>)
+    let currentDisplayCard = this.state.current.map((data,i) => <Card key={i}
+                                                                      index={this.state.index}
+                                                                      cardData={data}   
+                                                                      total={this.state.dataSet.length}/>)
+    console.log(this.state.dataSet.length)
     return(
       <div>
         <Header/>
         {currentDisplayCard}
-        <Controlls next={this.handleNext} prev={this.handlePrev} index={this.state.index} total={this.state.dataSet.length}/>
+        <Controlls 
+          next={this.handleNext} 
+          prev={this.handlePrev} 
+          index={this.state.index} 
+          total={this.state.dataSet.length}
+          delete={this.handleDelete}/>
       </div>
     )
   }

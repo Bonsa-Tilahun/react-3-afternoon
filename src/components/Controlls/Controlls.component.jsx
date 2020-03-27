@@ -1,23 +1,27 @@
 import React from 'react'
 import './controlls.styles.css'
-import CustomButton from '../CustomButton/CustomButton.component'
 const Controlls = (props)=>{
+    
     return(
         <div className="controlls-container">
-            <div className='controlls-previous'>
-                {props.index !== 1?
-                    <h6 onClick={props.prev}> Previous </h6>:
+            <div className='controlls-movement'>
+                {props.index !== 0?
+                    <button className='customBtn' onClick={props.prev}> Previous </button>:
                 null
                 }
             </div>
             <div className='controlls-middle'>
-                <CustomButton name={`Edit`}/>
-                <CustomButton name={`Delete`}/>
-                <CustomButton name={`New`}/>
+                {/* <CustomButton name={`Edit`}/>
+                <CustomButton onClick={() => { props.delete(props.index)}} name={`Delete`}/>
+                <CustomButton name={`New`}/> */}
+                <button className='customBtn' onClick={() => { props.delete(props.index)}}>Edit</button>
+                <button className='customBtn' onClick={() => { props.delete(props.index)}}>Delete</button>
+                <button className='customBtn' onClick={() => { props.delete(props.index)}}>New</button>
             </div>
-            <div className='controlls-next'>
-                {props.index !== props.total ?
-                    <h6 onClick={props.next}>Next</h6>:
+            <div className='controlls-movement'>
+
+                {props.index + 1 !== props.total ?
+                    <button className='customBtn' onClick={props.next}>Next</button>:
                 null
                 }
             </div>

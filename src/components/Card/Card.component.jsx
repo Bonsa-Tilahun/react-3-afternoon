@@ -1,6 +1,5 @@
 import React from 'react'
 import './card.styles.css'
-
 const Card = (props) =>{
     console.log(props.cardData.movieList)
     let name = `${props.cardData.name.first} ${props.cardData.name.last}`
@@ -12,7 +11,7 @@ const Card = (props) =>{
     return(
         <div className="card-container">
             <div className="card-number">
-                <h3>{props.cardData.id}/25</h3>
+                <h3>{props.index +1}/{props.total}</h3>
             </div>
             <div className="card-title">
                 <h3>{name}</h3>
